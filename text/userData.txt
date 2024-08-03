@@ -1,0 +1,33 @@
+const mongoose = require('mongoose');
+const User = require('./models/userModel');
+
+// setup mongo db connection , or back to routing
+
+// Example function to register a new user
+async function registerUser(userData) {
+  try {
+    const newUser = new User(userData);
+    const savedUser = await newUser.save();
+    console.log('User registered successfully');
+    return savedUser;
+  } catch (err) {
+    console.error('Error registering user:', err);
+  }
+}
+
+// Example user data
+const userData = {
+  displayname: 'Aditya Gaur',
+  enroll_number: '03320802722',
+  branch_section: 'Computer Science - A',
+  email: 'aditya38csea@bpitindia.edu.in',
+  team_name: 'Achievement Management',
+  member_role: 'Frontend Developer',
+  faculty: "Achal Kaushik",
+};
+
+registerUser(userData)
+  .then(savedUser => {
+    console.log('Registered User ID:', savedUser._id);
+  })
+  .catch(err => console.error('Error:', err));

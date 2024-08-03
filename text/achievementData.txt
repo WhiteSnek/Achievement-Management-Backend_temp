@@ -1,0 +1,37 @@
+// achievement dummy data with functions
+
+const mongoose = require('mongoose');
+const Achievement = require('./../models/achievementModel');
+
+
+// Example function to add an achievement for a user
+async function addAchievement(userId, achievementData) {
+  try {
+    const newAchievement = new Achievement({ ...achievementData, user: userId });
+    await newAchievement.save();
+    console.log('Achievement added successfully');
+  } catch (err) {
+    console.error('Error adding achievement:', err);
+  }
+}
+
+
+// Example usage
+const userId = 'PUT_REGISTERED_USER_ID_HERE'; // Replace with the actual user ID from the registration step
+const achievementData = {
+    name: 'Dora-Dora Hackathon',
+    description: 'First place in hackathon',
+    location: 'Dehradun',
+    // link: 'http://hackthonxyz.com',
+    date: new Date(),
+    result: 'won',
+    proof: null,
+    verificationStatus: pending,
+  
+};
+
+addAchievement(userId, achievementData)
+  .then(() => {
+    console.log('Achievement added for user:', userId);
+  })
+  .catch(err => console.error('Error:', err));
